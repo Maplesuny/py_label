@@ -7,6 +7,12 @@ import xml.etree.ElementTree as ET
 from scipy import signal
 import neurokit2 as nk
 
+import os
+import sys
+import psycopg2 as pg2
+import json
+import datetime
+
 
 class xml_struct:
     def __init__(self, xml_root, cur=0):

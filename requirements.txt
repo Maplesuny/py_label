@@ -1,0 +1,7 @@
+datetime
+fastapi[all]
+pandas
+xmltodict
+matplotlib
+scipy
+neurokit2
