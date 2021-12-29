@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from numpy import array
 from app.core.eeg_data_processor import get_eeg_data, get_patient_info, get_data_sec
 from fastapi.responses import JSONResponse
 import os
@@ -6,6 +7,8 @@ import sys
 import psycopg2 as pg2
 import json
 import datetime
+import time
+import random
 
 eeg_router = APIRouter()
 
@@ -22,10 +25,25 @@ def getDBConnection():
     return connection, cur
 
 
+def getDBConnection_eeg():
+    connection = pg2.connect(
+        database="testdb",
+        user='postgres',
+        password='god3214',
+        host='10.65.51.164',
+        port='5432'
+    )
+    cur = connection.cursor()
+    return connection, cur
+
+
 @eeg_router.get('/gettablenames')
-def getDBAlltables():
+def getDBAlltables(database: str):
     save_tablenames = []
-    conn, cur = getDBConnection()
+    if(database == 'eeg'):
+        conn, cur = getDBConnection_eeg()
+    else:
+        conn, cur = getDBConnection()
     cur.execute("SELECT * from pg_tables where schemaname = 'public'")
     conn.commit()
     table_data = cur.fetchall()
@@ -36,8 +54,11 @@ def getDBAlltables():
 
 
 @eeg_router.get('/gettable_column/{table}')
-def getpostgreSQL_columns(table):
-    conn, cur = getDBConnection()
+def getpostgreSQL_columns(table, database: str):
+    if(database == 'eeg'):
+        conn, cur = getDBConnection_eeg()
+    else:
+        conn, cur = getDBConnection()
     cur.execute('SELECT * FROM public."' + table + '" limit 0')
     conn.commit()
     colnames = [desc[0] for desc in cur.description]
@@ -45,9 +66,13 @@ def getpostgreSQL_columns(table):
 
 
 @eeg_router.get('/gettable_data/{table}')
-def gettable_data(table):
-    col_list = getpostgreSQL_columns(table)
-    conn, cur = getDBConnection()
+def gettable_data(table, database: str):
+    col_list = getpostgreSQL_columns(table, database)
+    if(database == 'eeg'):
+        conn, cur = getDBConnection_eeg()
+    else:
+        conn, cur = getDBConnection()
+    # conn, cur = getDBConnection()
     # cur.execute('SELECT * FROM public."' + table + '" limit 100000')
     cur.execute('SELECT * FROM public."' + table + '"')
     # print('SELECT * FROM public."' + table + '"')
@@ -67,7 +92,24 @@ def gettable_data(table):
         save_data_list.append(dicp_copy)
     return save_data_list
 
-# ---------------------------------------------------------------------
+
+# range0 = [1000, 200]
+# range1 = [2000, 300]
+# current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+
+@eeg_router.post('/insert_data')
+def insert_data_eeg(page: int, starttime: float, endtime: float, range0: str, range1: str):
+    # range0 = [1000, 2000]
+    # range1 = [2000, 300]
+    current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    conn, cur = getDBConnection_eeg()
+    sql_comman = 'INSERT INTO eeg (page,starttime,endtime,range0,range1,systemtime) VALUES' + '(' + str(page) + ',' + str(starttime) + ',' + str(
+        endtime) + ','+'array' + range0 + ',array' + range1+',' + 'TIMESTAMP '+'\'' + current_time + '\''+')' + ';'
+    cur.execute(sql_comman)
+    conn.commit()
+    print('Done save')
+    # ---------------------------------------------------------------------
 
 
 @eeg_router.get('/eegData')
