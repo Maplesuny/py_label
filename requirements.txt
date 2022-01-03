@@ -5,3 +5,4 @@ xmltodict
 matplotlib
 scipy
 neurokit2
+mne

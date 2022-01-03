@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from numpy import array
 from app.core.eeg_data_processor import get_eeg_data, get_patient_info, get_data_sec
+from app.core.Seizure_detect_pipeline import return_pred_result
 from fastapi.responses import JSONResponse
 import os
 import sys
@@ -35,6 +36,25 @@ def getDBConnection_eeg():
     )
     cur = connection.cursor()
     return connection, cur
+
+# def getDBConnection_eeg():
+#     connection = pg2.connect(
+#         database="testdb",
+#         user='postgres',
+#         password='1234',
+#         host='192.168.0.13',
+#         port='5432'
+#     )
+#     cur = connection.cursor()
+#     return connection, cur
+
+
+def restart_id():
+    reconn, recur = getDBConnection_eeg()
+    recur.execute('alter table eeg drop column id;')
+    recur.execute('ALTER TABLE eeg ADD COLUMN id serial;')
+    reconn.commit()
+    print('重置id完成')
 
 
 @eeg_router.get('/gettablenames')
@@ -97,6 +117,17 @@ def gettable_data(table, database: str):
 # range1 = [2000, 300]
 # current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
+@eeg_router.get('/get_eeg_data')
+def select_data():
+    conn, cur = getDBConnection_eeg()
+    select_url = 'select count(*) from eeg '
+    cur.execute(select_url)
+    conn.commit()
+    data = cur.fetchone()
+    for item in data:
+        # print(item)
+        return item
+
 
 @eeg_router.post('/insert_data')
 def insert_data_eeg(page: int, starttime: float, endtime: float, range0: str, range1: str):
@@ -109,7 +140,33 @@ def insert_data_eeg(page: int, starttime: float, endtime: float, range0: str, ra
     cur.execute(sql_comman)
     conn.commit()
     print('Done save')
-    # ---------------------------------------------------------------------
+
+
+@eeg_router.post('/delete_data')
+def delete_data():
+    conn, cur = getDBConnection_eeg()
+    # delete_sql = 'delete from eeg where id IN (select id from eeg order by id DESC limit 1)'
+    # 刪除前一筆
+    delete_sql = 'delete from eeg where id IN (select min(id) from eeg where id in (select id from eeg order by id desc limit 2))'
+    data_length = select_data()
+    print(data_length)
+    if data_length <= 1:
+        return
+    else:
+        cur.execute(delete_sql)
+        conn.commit()
+        restart_id()
+    print('刪除單筆完成')
+
+# ---------------------------------------------------------------------
+
+# 預測模型
+
+
+@eeg_router.get('/pre_result')
+def result():
+    pre_result = return_pred_result()
+    return pre_result
 
 
 @eeg_router.get('/eegData')
