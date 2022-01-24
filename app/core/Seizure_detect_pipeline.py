@@ -376,7 +376,11 @@ def TF_analysis(raw_banpas, ID):
 
 
 # files為整個資料夾，需要設置路徑
-data, Patient_ID = RDA2MNE('C:\\Users\\t37583\\Pictures\\mylabel\\t0.eeg')
+print('sdfsdfsdf', os.getcwd())
+mypath = os.getcwd() + '\\t0.eeg'
+print('mypath:', mypath)
+print(type(mypath))
+data, Patient_ID = RDA2MNE(mypath)
 TF_save_address = 'TF_Figure/'+str(Patient_ID)+'/'
 os.makedirs(TF_save_address, exist_ok=True)
 raw_banpas = EEG_PreProcessing(data)

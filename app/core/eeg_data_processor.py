@@ -400,6 +400,8 @@ def get_data_sec():
     print('----------------get Sec-----------------')
     # 當前資料夾路徑
     curr_file_path = os.getcwd()
+    # 指定要查詢的路徑
+    # yourPath = '//10.23.215.31/public/EEG_Abnormal/'
     folder_path = curr_file_path + '/t0.eeg'
     #EegFolderPath, RdaFile, PatientFile, SensorFile, HeaderFile, PosFile, EventFile, DeviceFile = get_subfile_path(the_EEG_path)
     eegFolderPath, rdaFilePath, patientFilePath, sensorFilePath, headerFilePath, posFilePath, eventFilePath, deviceFilePath = get_subfile_path(
@@ -436,6 +438,8 @@ def get_eeg_data(start_time, end_time, montage_type):
     #folder_path = '/home/leonard/project/leonard/t0.eeg'
     # 當前資料夾路徑
     curr_file_path = os.getcwd()
+    # 指定要查詢的路徑
+    # yourPath = '//10.23.215.31/public/EEG_Abnormal/'
     folder_path = curr_file_path + '/t0.eeg'
     print('dsfdfsdfdfsdf', folder_path)
     # folder_path = '/t0.eeg'

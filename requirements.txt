@@ -1,4 +1,5 @@
 datetime
+pathlib
 fastapi[all]
 pandas
 xmltodict
@@ -6,3 +7,9 @@ matplotlib
 scipy
 neurokit2
 mne
+tensorflow
+efficientnet
+psycopg2
+configparser
+tqdm
+Pillow

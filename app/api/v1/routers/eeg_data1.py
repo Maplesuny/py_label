@@ -232,6 +232,22 @@ def insert_data_eeg(page: int, starttime: float, endtime: float, range0: str, ra
     print('Done save')
 
 
+# @eeg_router.post('/delete_predata')
+# def delete_data():
+#     conn, cur = connection('eeg')
+#     # delete_sql = 'delete from eeg where id IN (select id from eeg order by id DESC limit 1)'
+#     # 刪除前一筆
+#     delete_sql = 'delete from eeg where id IN (select min(id) from eeg where id in (select id from eeg order by id desc limit 2))'
+#     data_length = select_data()
+#     print(data_length)
+#     if data_length <= 1:
+#         return
+#     else:
+#         cur.execute(delete_sql)
+#         conn.commit()
+#         restart_id()
+#     print('刪除單筆完成')
+
 # 給todo cancel的
 @eeg_router.post('/Cancelid')
 def cancelid(id: int):
