@@ -141,6 +141,33 @@ def getpage(page: int):
 
 
 @eeg_router.get('/testd')
+def testd(current_page):
+    class Reading:
+        def __init__(self, myid, done, title, events, page, start, end, channel, montage, features):
+            self.id = myid
+            self.done = done
+            self.title = title
+            self.events = events
+            self.page = page
+            self.starttime = start
+            self.endtime = end
+            self.channel = channel
+            self.montage_type = montage
+            self.features = features
+
+    query = 'select id,title,done,events,page,starttime,endtime,channel,montage_type,features from eeg  where page=' + \
+        current_page+' order by id'
+    print('query', query)
+    conn, cur = connection('eeg')
+    cur.execute(query)
+    conn.commit()
+    result = pd.read_sql(query, conn)
+    listOfReading = [(Reading(row.id, row.done, row.title, row.events, row.page, row.starttime, row.endtime, row.channel,
+                              row.montage_type, row.features)) for index, row in result.iterrows()]
+    return listOfReading
+
+
+@eeg_router.get('/testd_all')
 def testd():
     class Reading:
         def __init__(self, myid, done, title, events, start, end, channel, montage, features):
@@ -155,6 +182,7 @@ def testd():
             self.features = features
 
     query = 'select id,title,done,events,starttime,endtime,channel,montage_type,features from eeg  order by id'
+    print('query', query)
     conn, cur = connection('eeg')
     cur.execute(query)
     conn.commit()
