@@ -167,6 +167,47 @@ def testd(current_page):
     return listOfReading
 
 
+@eeg_router.get('/testddd')
+def testddd(current_page):
+    itemStyle = {'borderWidth': 3,
+                 'color': "rgba(245,39,56,0)", 'borderColor': 'rgba(220,20,57,0.8)'}
+
+    class Reading:
+        def __init__(self, myid, done, title, events, page, start, end, channel, montage, features):
+            self.id = myid
+            self.done = done
+            self.title = title
+            self.events = events
+            self.page = page
+            self.starttime = start
+            self.endtime = end
+            self.channel = channel
+            self.montage_type = montage
+            self.features = features
+            self.itemStyle = itemStyle
+
+    query = 'select id,title,done,events,page,starttime,endtime,channel,montage_type,features from eeg  where page=' + \
+        str(current_page)+' order by id'
+
+    conn, cur = connection('eeg')
+    cur.execute(query)
+    conn.commit()
+    result = pd.read_sql(query, conn)
+    for index, row in result.iterrows():
+        print(index, row)
+    # listOfReading = [(Reading(row.id, row.done, row.title, row.events, row.page, row.starttime, row.endtime, row.channel,
+    #                           row.montage_type, row.features)) for index, row in result.iterrows()]
+
+    # return listOfReading
+    listOfReading = []
+    for index, row in result.iterrows():
+        listOfReading.append([Reading(row.id, row.done, row.title, row.events, row.page,
+                             row.starttime, row.endtime, row.channel, row.montage_type, row.features), Reading(row.id, row.done, row.title, row.events, row.page,
+                             row.starttime, row.endtime, row.channel, row.montage_type, row.features)])
+
+    return listOfReading
+
+
 @eeg_router.get('/testd_all')
 def testd():
     class Reading:
