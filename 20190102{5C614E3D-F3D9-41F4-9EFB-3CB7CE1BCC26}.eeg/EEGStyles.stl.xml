@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<EEGStyles>
+    <EEGStyle>
+        <ID>1</ID>
+        <Name>[Default]</Name>
+        <Font>
+            <FontName>Microsoft Sans Serif</FontName>
+            <FontStyle>Regular</FontStyle>
+            <FontColor>-65536</FontColor>
+            <FontSize>8</FontSize>
+        </Font>
+        <Transparency>0</Transparency>
+        <ShowTimeAndDate>false</ShowTimeAndDate>
+        <VisibleText>true</VisibleText>
+        <VerticalText>false</VerticalText>
+        <ViewAlignment>0</ViewAlignment>
+        <LineColor>-65536</LineColor>
+    </EEGStyle>
+    <EEGStyle>
+        <ID>2</ID>
+        <Name>Data Events</Name>
+        <Font>
+            <FontName>Microsoft Sans Serif</FontName>
+            <FontStyle>Regular</FontStyle>
+            <FontColor>-16776961</FontColor>
+            <FontSize>8</FontSize>
+        </Font>
+        <Transparency>0</Transparency>
+        <ShowTimeAndDate>false</ShowTimeAndDate>
+        <VisibleText>true</VisibleText>
+        <VerticalText>false</VerticalText>
+        <ViewAlignment>0</ViewAlignment>
+        <LineColor>-16776961</LineColor>
+    </EEGStyle>
+    <EEGStyle>
+        <ID>3</ID>
+        <Name>Montage Events</Name>
+        <Font>
+            <FontName>Microsoft Sans Serif</FontName>
+            <FontStyle>Regular</FontStyle>
+            <FontColor>-8388480</FontColor>
+            <FontSize>8</FontSize>
+        </Font>
+        <Transparency>0</Transparency>
+        <ShowTimeAndDate>false</ShowTimeAndDate>
+        <VisibleText>true</VisibleText>
+        <VerticalText>false</VerticalText>
+        <ViewAlignment>0</ViewAlignment>
+        <LineColor>-8388480</LineColor>
+    </EEGStyle>
+    <EEGStyle>
+        <ID>4</ID>
+        <Name>Error</Name>
+        <Font>
+            <FontName>Microsoft Sans Serif</FontName>
+            <FontStyle>Bold</FontStyle>
+            <FontColor>-65536</FontColor>
+            <FontSize>8</FontSize>
+        </Font>
+        <Transparency>0</Transparency>
+        <ShowTimeAndDate>false</ShowTimeAndDate>
+        <VisibleText>true</VisibleText>
+        <VerticalText>false</VerticalText>
+        <ViewAlignment>0</ViewAlignment>
+        <LineColor>-65536</LineColor>
+    </EEGStyle>
+    <EEGStyle>
+        <ID>5</ID>
+        <Name>Configuration Changes</Name>
+        <Font>
+            <FontName>Microsoft Sans Serif</FontName>
+            <FontStyle>Regular</FontStyle>
+            <FontColor>-8388608</FontColor>
+            <FontSize>8</FontSize>
+        </Font>
+        <Transparency>0</Transparency>
+        <ShowTimeAndDate>false</ShowTimeAndDate>
+        <VisibleText>true</VisibleText>
+        <VerticalText>false</VerticalText>
+        <ViewAlignment>0</ViewAlignment>
+        <LineColor>-8388608</LineColor>
+    </EEGStyle>
+</EEGStyles>

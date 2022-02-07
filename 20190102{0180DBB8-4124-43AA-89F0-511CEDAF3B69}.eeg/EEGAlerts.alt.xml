@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<EEGAlerts>
+    <EnableAlerts>true</EnableAlerts>
+    <Alert>
+        <ID>2</ID>
+        <Name>Battery Flat</Name>
+        <AlertStr>Battery flat</AlertStr>
+        <SoundFile>notify.wav</SoundFile>
+        <TextToSpeech>true</TextToSpeech>
+        <Program></Program>
+    </Alert>
+</EEGAlerts>

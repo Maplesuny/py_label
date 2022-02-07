@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<VideoIndex Version="1">
+    <File Name="CMVideo00001.avi" StartRT="123330000" EndRT="3140669999" TruncatedStart="0" TruncatedEnd="0" VideoValid="1" VideoFirstFrame="123330000" VideoLastFrame="3170750001" VideoDroppedFrames="24" AudioValid="1" AudioFirstFrame="124080000" AudioLastFrame="3170480001" AudioDroppedFrames="0" FileSize="61064663" VideoBufferSize="118062" AudioBufferSize="640" />
+    <File Name="CMVideo00002.avi" StartRT="3140670000" EndRT="3510650001" TruncatedStart="0" TruncatedEnd="0" VideoValid="1" VideoFirstFrame="3140670000" VideoLastFrame="3510650001" VideoDroppedFrames="3" AudioValid="1" AudioFirstFrame="3140720000" AudioLastFrame="3510480001" AudioDroppedFrames="0" FileSize="7460654" VideoBufferSize="108358" AudioBufferSize="640" />
+</VideoIndex>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<movie>
+    <session server_name="" session_id="local" StartNS="4187113200" EndNS="355270000000" MergedOffsetNS="0">
+        <Segment StartNS="15831000000" EndNS="355270000000" />
+    </session>
+</movie>

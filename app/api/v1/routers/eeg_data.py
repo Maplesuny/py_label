@@ -167,6 +167,31 @@ def testd(current_page):
     return listOfReading
 
 
+@eeg_router.get('/ee')
+def testd():
+    class Reading:
+        def __init__(self, employee_id):
+            self.Employee_id = employee_id
+
+    query = 'select * from test'
+    print('query', query)
+    conn, cur = connection('eeg')
+    cur.execute(query)
+    conn.commit()
+    result = pd.read_sql(query, conn)
+    listOfReading = [(Reading(row.employee_id))
+                     for index, row in result.iterrows()]
+    return listOfReading
+
+
+@eeg_router.post('/post1')
+def cancelid():
+    conn, cur = connection('eeg')
+    cancel_sql = "insert into test (Employee_id) values ('T12345')"
+    cur.execute(cancel_sql)
+    conn.commit()
+
+
 @eeg_router.get('/testddd')
 def testddd(current_page):
     itemStyle = {'borderWidth': 3,
